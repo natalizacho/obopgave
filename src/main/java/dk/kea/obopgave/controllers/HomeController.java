@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    DogRepository DR = new DogRepository();
+    private DogRepository DR = new DogRepository();
 
     @GetMapping("/")
     public String index (Model model){
