@@ -23,12 +23,13 @@ public class DogRepository implements ICrudRepository<Dog> {
 
     @Override
     public void create(Dog dog) {
-        String sqlStatement = "INSERT INTO dogs (dog_type, dog_name, dog_age) VALUES (?, ? ,?)";
+        String sqlStatement = "INSERT INTO dogs (dog_id, dog_type, dog_name, dog_age) VALUES (?, ?, ?, ?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sqlStatement);
-            ps.setString(1, dog.getType());
-            ps.setString(2, dog.getName());
-            ps.setLong(3, dog.getAge());
+            ps.setInt(1, dog.getId());
+            ps.setString(2, dog.getType());
+            ps.setString(3, dog.getName());
+            ps.setInt(4, dog.getAge());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -58,12 +59,12 @@ public class DogRepository implements ICrudRepository<Dog> {
     }
 
     @Override
-    public Dog read(long id){
+    public Dog read(int id){
         Dog dog = null;
         String sqlStatement = "SELECT * FROM dogs WHERE dog_id = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sqlStatement);
-            ps.setLong(1, id);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 dog = new Dog(
@@ -82,7 +83,7 @@ public class DogRepository implements ICrudRepository<Dog> {
     @Override
     public boolean update(Dog dog) {
         boolean result = false;
-        String sql = "UPDATE dogs SET dog_type = ?, dog_name = ?, dog_age = ?" + "WHERE dog_id = ?";
+        String sql = "UPDATE dogs SET dog_type = ?, dog_name = ?, dog_age = ? WHERE dog_id = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, dog.getType());
@@ -102,12 +103,12 @@ public class DogRepository implements ICrudRepository<Dog> {
     }
 
     @Override
-    public boolean delete(long id) {
+    public boolean delete(int id) {
         boolean result = false;
         String sql = "DELETE FROM dogs WHERE dog_id = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setLong(1, id);
+            ps.setInt(1, id);
             int row = ps.executeUpdate();
             if (row > 0) {
                 System.out.println("deleted");
