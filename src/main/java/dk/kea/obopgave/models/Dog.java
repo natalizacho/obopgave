@@ -1,15 +1,25 @@
 package dk.kea.obopgave.models;
 
 public class Dog {
+    private int id;
     private String type;
     private String name;
     private int age;
 
 
-    public Dog(String type, String name, int age){
+    public Dog(int id, String type, String name, int age){
+        this.id = id;
         this.type = type;
         this.name = name;
         this.age = age;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getType() {
@@ -39,7 +49,8 @@ public class Dog {
     @Override
     public String toString() {
         return "Dog{" +
-                "type='" + type + '\'' +
+                "id=" + id +
+                ", type='" + type + '\'' +
                 ", name='" + name + '\'' +
                 ", age=" + age +
                 '}';
