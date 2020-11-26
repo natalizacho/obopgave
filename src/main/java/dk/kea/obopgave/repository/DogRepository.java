@@ -15,10 +15,10 @@ import java.util.List;
 @Repository
 public class DogRepository implements ICrudRepository<Dog> {
 
-    private Connection conn;
+    private final Connection conn;
 
     public DogRepository() {
-        this.conn = DatabaseConnectionManager.getDb().getConn();
+        this.conn = DatabaseConnectionManager.getDCM().getConn();
     }
 
     @Override

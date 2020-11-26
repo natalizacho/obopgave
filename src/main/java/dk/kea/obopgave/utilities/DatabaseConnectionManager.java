@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class DatabaseConnectionManager {
-    private static DatabaseConnectionManager db = new DatabaseConnectionManager();
+    private static final DatabaseConnectionManager DCM = new DatabaseConnectionManager();
     private Connection conn;
 
     private DatabaseConnectionManager() {
@@ -36,11 +36,11 @@ public class DatabaseConnectionManager {
         }
     }
 
-    public Connection getConn(){
-        return conn;
+    public static DatabaseConnectionManager getDCM() {
+        return DCM;
     }
 
-    public static DatabaseConnectionManager getDb(){
-        return db;
+    public Connection getConn() {
+        return conn;
     }
 }
