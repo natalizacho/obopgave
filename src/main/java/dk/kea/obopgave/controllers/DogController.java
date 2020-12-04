@@ -6,13 +6,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
+public class DogController {
 
-    private DogRepository DR = new DogRepository();
+    private DogRepository dogRepository;
+
+    public DogController() {
+        this.dogRepository = new DogRepository();
+    }
 
     @GetMapping("/")
-    public String index (Model model){
-        model.addAttribute("doglist", DR.readAll());
+    public String readAll(Model model){
+        model.addAttribute("doglist", dogRepository.readAll());
         return "index";
     }
 }
