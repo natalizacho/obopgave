@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class DatabaseConnectionManager {
+
     private static final DatabaseConnectionManager DCM = new DatabaseConnectionManager();
     private Connection conn;
 
